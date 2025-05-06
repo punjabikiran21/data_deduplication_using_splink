@@ -1,0 +1,457 @@
+{
+    "link_type": "dedupe_only",
+    "probability_two_random_records_match": 0.21510226947922026,
+    "retain_matching_columns": true,
+    "retain_intermediate_calculation_columns": true,
+    "additional_columns_to_retain": [],
+    "sql_dialect": "duckdb",
+    "linker_uid": "7q5bt5o9",
+    "em_convergence": 0.001,
+    "max_iterations": 25,
+    "bayes_factor_column_prefix": "bf_",
+    "term_frequency_adjustment_column_prefix": "tf_",
+    "comparison_vector_value_column_prefix": "gamma_",
+    "unique_id_column_name": "unique_id",
+    "source_dataset_column_name": "source_dataset",
+    "blocking_rules_to_generate_predictions": [
+        {
+            "blocking_rule": "(l.\"first_name\" = r.\"first_name\") AND (l.\"last_name\" = r.\"last_name\")",
+            "sql_dialect": "duckdb"
+        },
+        {
+            "blocking_rule": "l.\"zip\" = r.\"zip\"",
+            "sql_dialect": "duckdb"
+        },
+        {
+            "blocking_rule": "(l.\"first_name_metaphone\" = r.\"first_name_metaphone\") AND (l.\"last_name_metaphone\" = r.\"last_name_metaphone\")",
+            "sql_dialect": "duckdb"
+        },
+        {
+            "blocking_rule": "l.\"phone\" = r.\"phone\"",
+            "sql_dialect": "duckdb"
+        },
+        {
+            "blocking_rule": "(l.\"first_name\" = r.\"first_name\") AND (l.\"zip\" = r.\"zip\")",
+            "sql_dialect": "duckdb"
+        },
+        {
+            "blocking_rule": "(l.\"last_name\" = r.\"last_name\") AND (l.\"zip\" = r.\"zip\")",
+            "sql_dialect": "duckdb"
+        },
+        {
+            "blocking_rule": "l.\"last_name_metaphone\" = r.\"last_name_metaphone\"",
+            "sql_dialect": "duckdb"
+        }
+    ],
+    "comparisons": [
+        {
+            "output_column_name": "first_name",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"first_name_l\" IS NULL OR \"first_name_r\" IS NULL",
+                    "label_for_charts": "first_name is NULL",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"first_name_l\" = \"first_name_r\"",
+                    "label_for_charts": "Exact match on first_name",
+                    "m_probability": 0.8059999995006715,
+                    "u_probability": 0.003930212084833934,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"first_name_l\", \"first_name_r\") >= 0.7",
+                    "label_for_charts": "Jaro-Winkler distance of first_name >= 0.7",
+                    "m_probability": 0.0959999999402797,
+                    "u_probability": 0.027988475390156062,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"first_name_l\", \"first_name_r\") >= 0.85",
+                    "label_for_charts": "Jaro-Winkler distance of first_name >= 0.85",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 0.09800000055904873,
+                    "u_probability": 0.96808131252501,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                }
+            ],
+            "comparison_description": "JaroWinklerAtThresholds"
+        },
+        {
+            "output_column_name": "last_name",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"last_name_l\" IS NULL OR \"last_name_r\" IS NULL",
+                    "label_for_charts": "last_name is NULL",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"last_name_l\" = \"last_name_r\"",
+                    "label_for_charts": "Exact match on last_name",
+                    "m_probability": 0.8739999994221723,
+                    "u_probability": 0.0036837134853941575,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"last_name_l\", \"last_name_r\") >= 0.7",
+                    "label_for_charts": "Jaro-Winkler distance of last_name >= 0.7",
+                    "m_probability": 0.07199999995478606,
+                    "u_probability": 0.022408003201280512,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"last_name_l\", \"last_name_r\") >= 0.85",
+                    "label_for_charts": "Jaro-Winkler distance of last_name >= 0.85",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 0.054000000623041576,
+                    "u_probability": 0.9739082833133254,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                }
+            ],
+            "comparison_description": "JaroWinklerAtThresholds"
+        },
+        {
+            "output_column_name": "first_name_metaphone",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"first_name_metaphone_l\" IS NULL OR \"first_name_metaphone_r\" IS NULL",
+                    "label_for_charts": "first_name_metaphone is NULL",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"first_name_metaphone_l\" = \"first_name_metaphone_r\"",
+                    "label_for_charts": "Exact match on first_name_metaphone",
+                    "m_probability": 0.8480000000079647,
+                    "u_probability": 0.007077711084433774,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 0.15200000052534784,
+                    "u_probability": 0.9929222889155662,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                }
+            ],
+            "comparison_description": "ExactMatch"
+        },
+        {
+            "output_column_name": "last_name_metaphone",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"last_name_metaphone_l\" IS NULL OR \"last_name_metaphone_r\" IS NULL",
+                    "label_for_charts": "last_name_metaphone is NULL",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"last_name_metaphone_l\" = \"last_name_metaphone_r\"",
+                    "label_for_charts": "Exact match on last_name_metaphone",
+                    "m_probability": 0.9399999999995017,
+                    "u_probability": 0.004920688275310124,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 0.060000000619338266,
+                    "u_probability": 0.9950793117246899,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                }
+            ],
+            "comparison_description": "ExactMatch"
+        },
+        {
+            "output_column_name": "email",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"email_l\" IS NULL OR \"email_r\" IS NULL",
+                    "label_for_charts": "email is NULL",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"email_l\" = \"email_r\"",
+                    "label_for_charts": "Exact match on email",
+                    "m_probability": 1.0,
+                    "u_probability": 0.00022452721712122088,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "tf_adjustment_column": "email",
+                    "tf_adjustment_weight": 1.0
+                },
+                {
+                    "sql_condition": "NULLIF(regexp_extract(\"email_l\", '^[^@]+', 0), '') = NULLIF(regexp_extract(\"email_r\", '^[^@]+', 0), '')",
+                    "label_for_charts": "Exact match on username",
+                    "u_probability": 1.1566553609275016e-05,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"email_l\", \"email_r\") >= 0.88",
+                    "label_for_charts": "Jaro-Winkler distance of email >= 0.88",
+                    "u_probability": 0.00039530397923463436,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(NULLIF(regexp_extract(\"email_l\", '^[^@]+', 0), ''), NULLIF(regexp_extract(\"email_r\", '^[^@]+', 0), '')) >= 0.88",
+                    "label_for_charts": "Jaro-Winkler >0.88 on username",
+                    "u_probability": 0.0006715404948443788,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 1.8312169128805645e-19,
+                    "u_probability": 0.9986970617551905,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                }
+            ],
+            "comparison_description": "EmailComparison"
+        },
+        {
+            "output_column_name": "phone",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"phone_l\" IS NULL OR \"phone_r\" IS NULL",
+                    "label_for_charts": "phone is NULL",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"phone_l\" = \"phone_r\"",
+                    "label_for_charts": "Exact match on phone",
+                    "m_probability": 0.9999999999999148,
+                    "u_probability": 0.00023142055922097487,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "levenshtein(\"phone_l\", \"phone_r\") <= 0.7",
+                    "label_for_charts": "Levenshtein distance of phone <= 0.7",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "levenshtein(\"phone_l\", \"phone_r\") <= 0.9",
+                    "label_for_charts": "Levenshtein distance of phone <= 0.9",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 8.518868401121964e-14,
+                    "u_probability": 0.999768579440779,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                }
+            ],
+            "comparison_description": "LevenshteinAtThresholds"
+        },
+        {
+            "output_column_name": "street",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"street_l\" IS NULL OR \"street_r\" IS NULL",
+                    "label_for_charts": "street is NULL",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"street_l\" = \"street_r\"",
+                    "label_for_charts": "Exact match on street",
+                    "m_probability": 0.9219999988485094,
+                    "u_probability": 0.00014757903161264507,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "levenshtein(\"street_l\", \"street_r\") <= 0.4",
+                    "label_for_charts": "Levenshtein distance of street <= 0.4",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "levenshtein(\"street_l\", \"street_r\") <= 0.7",
+                    "label_for_charts": "Levenshtein distance of street <= 0.7",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "levenshtein(\"street_l\", \"street_r\") <= 0.85",
+                    "label_for_charts": "Levenshtein distance of street <= 0.85",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 0.07800000115149064,
+                    "u_probability": 0.9998524209683873,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                }
+            ],
+            "comparison_description": "LevenshteinAtThresholds"
+        },
+        {
+            "output_column_name": "city",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"city_l\" IS NULL OR \"city_r\" IS NULL",
+                    "label_for_charts": "city is NULL",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"city_l\" = \"city_r\"",
+                    "label_for_charts": "Exact match on city",
+                    "m_probability": 0.9334486716093409,
+                    "u_probability": 0.00024489795918367346,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"city_l\", \"city_r\") >= 0.4",
+                    "label_for_charts": "Jaro-Winkler distance of city >= 0.4",
+                    "m_probability": 0.06039624687950628,
+                    "u_probability": 0.8809478991596639,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"city_l\", \"city_r\") >= 0.7",
+                    "label_for_charts": "Jaro-Winkler distance of city >= 0.7",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "jaro_winkler_similarity(\"city_l\", \"city_r\") >= 0.85",
+                    "label_for_charts": "Jaro-Winkler distance of city >= 0.85",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 0.01231016302230575,
+                    "u_probability": 0.11880720288115246,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                }
+            ],
+            "comparison_description": "JaroWinklerAtThresholds"
+        },
+        {
+            "output_column_name": "state",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"state_l\" IS NULL OR \"state_r\" IS NULL",
+                    "label_for_charts": "state is NULL",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"state_l\" = \"state_r\"",
+                    "label_for_charts": "Exact match on state",
+                    "m_probability": 0.9999999999999383,
+                    "u_probability": 0.019696838735494198,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 6.170077495237522e-14,
+                    "u_probability": 0.9803031612645058,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                }
+            ],
+            "comparison_description": "ExactMatch"
+        },
+        {
+            "output_column_name": "zip",
+            "comparison_levels": [
+                {
+                    "sql_condition": "\"zip_l\" IS NULL OR \"zip_r\" IS NULL",
+                    "label_for_charts": "zip is NULL",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false,
+                    "is_null_level": true
+                },
+                {
+                    "sql_condition": "\"zip_l\" = \"zip_r\"",
+                    "label_for_charts": "Exact match on full postcode",
+                    "m_probability": 0.9334486709525738,
+                    "u_probability": 0.00016838735494197678,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "NULLIF(regexp_extract(\"zip_l\", '^[A-Za-z]{1,2}[0-9][A-Za-z0-9]? [0-9]', 0), '') = NULLIF(regexp_extract(\"zip_r\", '^[A-Za-z]{1,2}[0-9][A-Za-z0-9]? [0-9]', 0), '')",
+                    "label_for_charts": "Exact match on sector",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "NULLIF(regexp_extract(\"zip_l\", '^[A-Za-z]{1,2}[0-9][A-Za-z0-9]?', 0), '') = NULLIF(regexp_extract(\"zip_r\", '^[A-Za-z]{1,2}[0-9][A-Za-z0-9]?', 0), '')",
+                    "label_for_charts": "Exact match on district",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "NULLIF(regexp_extract(\"zip_l\", '^[A-Za-z]{1,2}', 0), '') = NULLIF(regexp_extract(\"zip_r\", '^[A-Za-z]{1,2}', 0), '')",
+                    "label_for_charts": "Exact match on area",
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                },
+                {
+                    "sql_condition": "ELSE",
+                    "label_for_charts": "All other comparisons",
+                    "m_probability": 0.06655132904742612,
+                    "u_probability": 0.999831612645058,
+                    "fix_m_probability": false,
+                    "fix_u_probability": false
+                }
+            ],
+            "comparison_description": "PostcodeComparison"
+        }
+    ]
+}
